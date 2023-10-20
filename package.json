@@ -1,0 +1,27 @@
+{
+  "name": "nextjs-static-site-wordpress",
+  "version": "1.0.0",
+  "description": "",
+  "packageManager": "pnpm@8.9.0",
+  "packages": [
+    "next",
+    "wordpress"
+  ],
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "start": "turbo start",
+    "lint": "turbo lint",
+    "tsc": "turbo tsc"
+  },
+  "keywords": [],
+  "author": "Matt Dickey <@8bit-echo>",
+  "license": "ISC",
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "eslint": "^8.51.0",
+    "prettier": "^3.0.3",
+    "turbo": "^1.10.15",
+    "typescript": "^5.2.2"
+  }
+}

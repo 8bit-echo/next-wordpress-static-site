@@ -1,0 +1,26 @@
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "globalDependencies": ["**/.env.*local"],
+  "globalEnv": ["CI", "NODE_ENV"],
+  "pipeline": {
+    "pull-env": {
+      "cache": false
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "build": {
+      "dependsOn": ["start"],
+      "env": [],
+      "outputs": [".next/**"]
+    },
+    "start": {
+      "cache": false
+    },
+    "lint": {},
+    "tsc": {
+      "outputs": ["tsconfig.tsbuildinfo", ".tsoutput"]
+    }
+  }
+}

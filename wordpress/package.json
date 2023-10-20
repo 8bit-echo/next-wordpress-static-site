@@ -1,0 +1,9 @@
+{
+  "name": "wordpress",
+  "description": "this file is just here so that turbo can run the docker compose commands",
+  "scripts": {
+    "dev": "docker compose up",
+    "start": "docker compose up"
+  },
+  "dependencies": {}
+}
