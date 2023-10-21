@@ -1,21 +1,32 @@
-import { Post } from '@/types/WordPress/post';
-import fetchJSON from '@/util/fetchJson';
 import { NextPageProps } from '@/types/next';
 import { ReactElement } from 'react';
+import createStaticParams from '@/util/createStaticParams';
+import { RenderedContent } from '@/components/RenderedContent';
+import { notFound } from 'next/navigation';
+import { fetchBySlug } from '@/util/fetchBySlug';
+import { Page } from '@/types/WordPress/page';
 
-interface PostDetailPageProps extends NextPageProps {
-  slug: number;
+// generateStaticParams is used to tell next which paths need
+// to be statically rendered at build time.
+export const generateStaticParams = createStaticParams('/pages');
+
+interface PageDetailsProps extends NextPageProps {
+  slug: string;
 }
 
-export default async function PostDetailPage({ slug }: PostDetailPageProps): Promise<ReactElement> {
-  console.log(slug);
+export default async function PageDetailsProps({
+  params: { slug },
+}: PageDetailsProps): Promise<ReactElement> {
+  const pageDetail = await fetchBySlug<Page>('pages', slug);
 
-  const postDetail = await fetchJSON<Post>(`/posts/?slug=${slug}`);
-  console.log(postDetail);
-  return <div>PostDetailPage</div>;
-}
+  if (!pageDetail) {
+    notFound();
+  }
 
-export async function generateStaticParams(): Promise<{ slug: string }[]> {
-  const posts = await fetchJSON<Post[]>('/posts');
-  return posts.map(({slug}) => ({ slug }));
+  return (
+    <article>
+      <RenderedContent as="h1">{pageDetail.title.rendered}</RenderedContent>
+      <RenderedContent>{pageDetail.content.rendered}</RenderedContent>
+    </article>
+  );
 }

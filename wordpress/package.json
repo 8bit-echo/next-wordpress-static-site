@@ -5,5 +5,7 @@
     "dev": "docker compose up",
     "start": "docker compose up"
   },
-  "dependencies": {}
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
 }
