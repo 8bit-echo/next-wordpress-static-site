@@ -1,11 +1,8 @@
 import Image from 'next/image';
 import styles from './page.module.css';
-import type { Post as WordPressPost } from '@/types/WordPress/post';
-import fetchJSON from '@/util/fetchJson';
-import { Post } from '@/components/Post';
 
 export default async function Home() {
-  const posts = await fetchJSON<WordPressPost[]>('/posts');
+  
 
   return (
     <main className={styles.main}>
@@ -44,9 +41,6 @@ export default async function Home() {
         />
       </div>
 
-      {posts.map((post) => (
-        <Post post={post} key={post.id} />
-      ))}
     </main>
   );
 }
